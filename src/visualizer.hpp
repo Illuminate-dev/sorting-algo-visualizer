@@ -8,7 +8,7 @@
 class Visualizer {
 public:
   static const int HEIGHT = 600;
-  static const int WIDTH = 800;
+  static const int WIDTH = 1600;
   static const int REC_WIDTH = 10;
   sf::RenderWindow window;
   std::vector<SortItem> nums;
