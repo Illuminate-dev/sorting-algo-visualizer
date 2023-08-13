@@ -1,5 +1,5 @@
 CC=clang++
-CFLAGS=-lsfml-graphics -lsfml-window -lsfml-system
+CFLAGS=-lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 SRC_DIR = src
 OBJ = app.cpp
 INCLUDE = src/visualizer.cpp src/SortItem.cpp src/Sorting.cpp src/algos/bubble_sort.cpp

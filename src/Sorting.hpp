@@ -3,6 +3,8 @@
 
 #include "SortItem.hpp"
 
+#include <SFML/Audio.hpp>
+
 class Sorting {
 public:
   Sorting();
@@ -14,6 +16,9 @@ public:
 protected:
   int wait_time;
   bool is_running;
+  sf::SoundBuffer buffer;
+  sf::Sound sound;
+  void play_sound(int index);
 };
 
 #endif // !SORTING_HPP
