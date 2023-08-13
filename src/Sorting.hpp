@@ -2,8 +2,8 @@
 #define SORTING_HPP
 
 #include "SortItem.hpp"
-
 #include <SFML/Audio.hpp>
+#include <queue>
 
 class Sorting {
 public:
@@ -17,7 +17,8 @@ protected:
   int wait_time;
   bool is_running;
   sf::SoundBuffer buffer;
-  sf::Sound sound;
+  // sf::Sound sound;
+  std::queue<sf::Sound> sounds;
   void play_sound(int index);
   void run_sound(std::vector<SortItem> &nums);
 };
