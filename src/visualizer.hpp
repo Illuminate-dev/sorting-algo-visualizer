@@ -1,7 +1,9 @@
 #ifndef VISUALIZER_HPP
 #define VISUALIZER_HPP
 #include "SortItem.hpp"
+#include "Sorting.hpp"
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 class Visualizer {
 public:
@@ -14,6 +16,7 @@ public:
   void run();
 
 private:
+  std::unique_ptr<Sorting> sorting_algo;
   void display_rectangles(sf::RenderWindow &window);
   void start_sort();
 };
