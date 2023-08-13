@@ -4,20 +4,25 @@
 int HEIGHT = 600;
 int WIDTH = 800;
 
+int REC_WIDTH = 10;
+
+void display_rectangles(sf::RenderWindow &window, int rectangles[]) {
+  for (int i = 0; i < WIDTH / REC_WIDTH; i += 1) {
+    sf::RectangleShape rectangle(sf::Vector2f(REC_WIDTH, rectangles[i]));
+    rectangle.setFillColor(sf::Color::White);
+    rectangle.setPosition(i * REC_WIDTH, HEIGHT - rectangles[i]);
+    window.draw(rectangle);
+  }
+}
+
 int main() {
   sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "My window");
 
-  int recWidth = 10;
+  int rectangles[WIDTH / REC_WIDTH];
 
-  sf::RectangleShape rectangles[WIDTH / recWidth];
-
-  for (int i = 0; i < WIDTH / recWidth; i += 1) {
-    int h = i * (HEIGHT / (WIDTH / recWidth));
-    rectangles[i].setSize(sf::Vector2f(recWidth, h));
-    rectangles[i].setFillColor(sf::Color::White);
-    rectangles[i].setPosition(i * recWidth, HEIGHT - h);
+  for (int i = 0; i < WIDTH / REC_WIDTH; i += 1) {
+    rectangles[i] = rand() % HEIGHT;
   }
-  std::swap(rectangles[0], rectangles[WIDTH / recWidth - 1]);
 
   while (window.isOpen()) {
     sf::Event event;
@@ -30,9 +35,7 @@ int main() {
       }
     }
     window.clear(sf::Color::Black);
-    for (int i = 0; i < WIDTH / recWidth; i += 1) {
-      window.draw(rectangles[i]);
-    }
+    display_rectangles(window, rectangles);
     window.display();
   }
   return 0;
