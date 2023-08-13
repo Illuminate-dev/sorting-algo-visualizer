@@ -9,12 +9,13 @@ public:
   static const int WIDTH = 800;
   static const int REC_WIDTH = 10;
   sf::RenderWindow window;
-  SortItem rectangles[WIDTH / REC_WIDTH];
+  std::vector<SortItem> nums;
   Visualizer();
   void run();
 
 private:
-  void display_rectangles(sf::RenderWindow &window, SortItem rectangles[]);
+  void display_rectangles(sf::RenderWindow &window);
+  void start_sort();
 };
 
 #endif

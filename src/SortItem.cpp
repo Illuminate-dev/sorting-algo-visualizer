@@ -9,12 +9,19 @@ SortItem::SortItem() {
   this->color = DEFAULT_COLOR;
 }
 
+SortItem::SortItem(int value) {
+  this->value = value;
+  this->color = DEFAULT_COLOR;
+}
+
 void SortItem::set_color(sf::Color color) { this->color = color; }
 
 void SortItem::reset_color() { this->color = DEFAULT_COLOR; }
 
-sf::RectangleShape SortItem::to_rectangle() {
-  sf::RectangleShape rectangle(sf::Vector2f(Visualizer::REC_WIDTH, value));
-  rectangle.setFillColor(color);
-  return rectangle;
+bool operator<(const SortItem &lhs, const SortItem &rhs) {
+  return lhs.value < rhs.value;
+}
+
+bool operator>(const SortItem &lhs, const SortItem &rhs) {
+  return lhs.value > rhs.value;
 }

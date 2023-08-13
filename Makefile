@@ -2,7 +2,7 @@ CC=clang++
 CFLAGS=-lsfml-graphics -lsfml-window -lsfml-system
 SRC_DIR = src
 OBJ = app.cpp
-INCLUDE = src/visualizer.cpp src/SortItem.cpp
+INCLUDE = src/visualizer.cpp src/SortItem.cpp src/Sorting.cpp src/algos/bubble_sort.cpp
 
 
 sav: $(SRC_DIR)/$(OBJ)
