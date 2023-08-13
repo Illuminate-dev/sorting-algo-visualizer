@@ -42,6 +42,15 @@ void Visualizer::run() {
             std::thread(&Visualizer::start_sort, this).detach();
           }
           break;
+        case sf::Keyboard::R:
+          if (sorting_algo->isRunning()) {
+            sorting_algo->stop();
+          }
+          nums.clear();
+          for (int i = 0; i < WIDTH / REC_WIDTH; i += 1) {
+            nums.push_back(SortItem(rand() % HEIGHT));
+          }
+          break;
         case sf::Keyboard::Escape:
           window.close();
           break;
