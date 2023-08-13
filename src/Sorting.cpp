@@ -29,6 +29,10 @@ void Sorting::play_sound(int v) {
 
 void Sorting::run_sound(std::vector<SortItem> &nums) {
   for (int i = 0; i < nums.size(); i++) {
+    if (!is_running) {
+      return;
+    }
+
     nums[i].set_color(sf::Color::Green);
     play_sound(nums[i].value);
     std::this_thread::sleep_for(std::chrono::milliseconds(wait_time * 2));

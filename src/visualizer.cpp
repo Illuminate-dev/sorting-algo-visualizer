@@ -1,6 +1,8 @@
 #include "visualizer.hpp"
 #include "SortItem.hpp"
 #include "algos/bubble_sort.hpp"
+#include "algos/insertion_sort.hpp"
+#include "algos/merge_sort.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <thread>
@@ -8,7 +10,7 @@
 Visualizer::Visualizer() {
   window.create(sf::VideoMode(WIDTH, HEIGHT), "Sorting Visualizer");
 
-  sorting_algo = std::make_unique<BubbleSort>(10);
+  sorting_algo = std::make_unique<BubbleSort>((int)SLEEP_TIME);
 
   nums.clear();
 
@@ -43,13 +45,25 @@ void Visualizer::run() {
           }
           break;
         case sf::Keyboard::R:
-          if (sorting_algo->isRunning()) {
-            sorting_algo->stop();
-          }
-          nums.clear();
-          for (int i = 0; i < WIDTH / REC_WIDTH; i += 1) {
-            nums.push_back(SortItem(rand() % HEIGHT));
-          }
+          reset();
+          break;
+        case sf::Keyboard::I:
+          sorting_algo->stop();
+          std::this_thread::sleep_for(
+              std::chrono::milliseconds((int)SLEEP_TIME));
+          sorting_algo = std::make_unique<InsertionSort>((int)SLEEP_TIME);
+          break;
+        case sf::Keyboard::B:
+          sorting_algo->stop();
+          std::this_thread::sleep_for(
+              std::chrono::milliseconds((int)SLEEP_TIME));
+          sorting_algo = std::make_unique<BubbleSort>((int)SLEEP_TIME);
+          break;
+        case sf::Keyboard::M:
+          sorting_algo->stop();
+          std::this_thread::sleep_for(
+              std::chrono::milliseconds((int)SLEEP_TIME));
+          sorting_algo = std::make_unique<MergeSort>((int)SLEEP_TIME);
           break;
         case sf::Keyboard::Escape:
           window.close();
@@ -63,6 +77,17 @@ void Visualizer::run() {
     window.clear(sf::Color::Black);
     display_rectangles(window);
     window.display();
+  }
+}
+
+void Visualizer::reset() {
+  if (sorting_algo->isRunning()) {
+    sorting_algo->stop();
+  }
+  std::this_thread::sleep_for(std::chrono::milliseconds((int)SLEEP_TIME));
+  nums.clear();
+  for (int i = 0; i < WIDTH / REC_WIDTH; i += 1) {
+    nums.push_back(SortItem(rand() % HEIGHT));
   }
 }
 
