@@ -1,5 +1,4 @@
 #include "bubble_sort.hpp"
-#include <chrono>
 #include <thread>
 
 BubbleSort::BubbleSort(int sleep_time) { wait_time = sleep_time; }
@@ -12,14 +11,14 @@ void BubbleSort::sort(std::vector<SortItem> &nums) {
   for (int i = 0; i < size - 1; i++) {
     for (int j = 0; j < size - i - 1; j++) {
 
-      play_sound(nums[j + 1].value);
-
       if (!is_running) {
         return;
       }
 
       nums[j].set_color(sf::Color::Red);
       nums[j + 1].set_color(sf::Color::Red);
+
+      play_sound(nums[j + 1].value);
 
       std::this_thread::sleep_for(std::chrono::milliseconds(wait_time));
 
@@ -30,4 +29,8 @@ void BubbleSort::sort(std::vector<SortItem> &nums) {
       }
     }
   }
+
+  run_sound(nums);
+
+  is_running = false;
 }

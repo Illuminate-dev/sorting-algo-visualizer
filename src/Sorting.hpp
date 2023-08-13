@@ -19,6 +19,7 @@ protected:
   sf::SoundBuffer buffer;
   sf::Sound sound;
   void play_sound(int index);
+  void run_sound(std::vector<SortItem> &nums);
 };
 
 #endif // !SORTING_HPP
