@@ -20,6 +20,7 @@ private:
   std::unique_ptr<Sorting> sorting_algo;
   void display_rectangles(sf::RenderWindow &window);
   void start_sort();
+  void reset_colors();
   void reset();
 };
 

@@ -1,8 +1,10 @@
 #include "visualizer.hpp"
 #include "SortItem.hpp"
 #include "algos/bubble_sort.hpp"
+#include "algos/counting_sort.hpp"
 #include "algos/insertion_sort.hpp"
 #include "algos/merge_sort.hpp"
+#include "algos/selection_sort.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <thread>
@@ -40,6 +42,9 @@ void Visualizer::run() {
         case sf::Keyboard::Space:
           if (sorting_algo->isRunning()) {
             sorting_algo->stop();
+            std::this_thread::sleep_for(
+                std::chrono::milliseconds((int)SLEEP_TIME));
+            reset_colors();
           } else {
             std::thread(&Visualizer::start_sort, this).detach();
           }
@@ -51,19 +56,36 @@ void Visualizer::run() {
           sorting_algo->stop();
           std::this_thread::sleep_for(
               std::chrono::milliseconds((int)SLEEP_TIME));
+          reset_colors();
           sorting_algo = std::make_unique<InsertionSort>((int)SLEEP_TIME);
           break;
         case sf::Keyboard::B:
           sorting_algo->stop();
           std::this_thread::sleep_for(
               std::chrono::milliseconds((int)SLEEP_TIME));
+          reset_colors();
           sorting_algo = std::make_unique<BubbleSort>((int)SLEEP_TIME);
           break;
         case sf::Keyboard::M:
           sorting_algo->stop();
           std::this_thread::sleep_for(
               std::chrono::milliseconds((int)SLEEP_TIME));
+          reset_colors();
           sorting_algo = std::make_unique<MergeSort>((int)SLEEP_TIME);
+          break;
+        case sf::Keyboard::S:
+          sorting_algo->stop();
+          std::this_thread::sleep_for(
+              std::chrono::milliseconds((int)SLEEP_TIME));
+          reset_colors();
+          sorting_algo = std::make_unique<SelectionSort>((int)SLEEP_TIME);
+          break;
+        case sf::Keyboard::C:
+          sorting_algo->stop();
+          std::this_thread::sleep_for(
+              std::chrono::milliseconds((int)SLEEP_TIME));
+          reset_colors();
+          sorting_algo = std::make_unique<CountingSort>((int)SLEEP_TIME);
           break;
         case sf::Keyboard::Escape:
           window.close();
@@ -88,6 +110,12 @@ void Visualizer::reset() {
   nums.clear();
   for (int i = 0; i < WIDTH / REC_WIDTH; i += 1) {
     nums.push_back(SortItem(rand() % HEIGHT));
+  }
+}
+
+void Visualizer::reset_colors() {
+  for (int i = 0; i < WIDTH / REC_WIDTH; i += 1) {
+    nums[i].color = sf::Color::White;
   }
 }
 
