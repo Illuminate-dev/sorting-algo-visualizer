@@ -4,6 +4,7 @@
 #include "algos/counting_sort.hpp"
 #include "algos/insertion_sort.hpp"
 #include "algos/merge_sort.hpp"
+#include "algos/quicksort.hpp"
 #include "algos/selection_sort.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -86,6 +87,13 @@ void Visualizer::run() {
               std::chrono::milliseconds((int)SLEEP_TIME));
           reset_colors();
           sorting_algo = std::make_unique<CountingSort>((int)SLEEP_TIME);
+          break;
+        case sf::Keyboard::Q:
+          sorting_algo->stop();
+          std::this_thread::sleep_for(
+              std::chrono::milliseconds((int)SLEEP_TIME));
+          reset_colors();
+          sorting_algo = std::make_unique<QuickSort>((int)SLEEP_TIME);
           break;
         case sf::Keyboard::Escape:
           window.close();
